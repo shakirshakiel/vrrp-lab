@@ -13,7 +13,7 @@ hosts = {
 }
 servers = {
   "server1" => {
-    "priority": 150,
+    "priority": 101,
     "interface": "enp0s8"
   },
   "server2" => {

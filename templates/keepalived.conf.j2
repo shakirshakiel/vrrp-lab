@@ -1,5 +1,17 @@
 ! Configuration File for keepalived
 
+vrrp_script check_nginx_status {
+  script       "systemctl status nginx"
+  interval      2 
+  weight        50
+}
+
+vrrp_script check_test {
+  script       "/usr/local/bin/test.sh"
+  interval      2 
+  weight        50
+}
+
 vrrp_instance VI_1 {
     state MASTER
     interface {{ servers[ansible_hostname].interface }}
@@ -10,8 +22,13 @@ vrrp_instance VI_1 {
         auth_type PASS
         auth_pass {{ password }}
     }
+
     virtual_ipaddress {
         {{ hosts["server"] }}
+    }
+
+    track_script {
+        check_nginx_status
     }
 }
 

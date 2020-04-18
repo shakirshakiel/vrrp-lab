@@ -33,6 +33,19 @@
       - keepalived
       - tcpdump
       - nginx
+  - name: Copy test.sh
+    copy:
+      dest: /usr/local/bin/test.sh
+      src: test.sh
+      owner: root
+      group: root
+      mode: 0755
+  - name: Copy success file
+    copy:
+      dest: /usr/local/bin/success
+      src: success
+      owner: root
+      group: root
   - name: keepalived config
     template:
       dest: /etc/keepalived/keepalived.conf
