@@ -32,6 +32,7 @@
     with_items:
       - keepalived
       - tcpdump
+      - nginx
   - name: keepalived config
     template:
       dest: /etc/keepalived/keepalived.conf
@@ -40,10 +41,22 @@
       group: root
     notify:
       - restart keepalived
+  - name: nginx html page
+    template:
+      dest: /var/www/html/index.nginx-debian.html
+      src: templates/nginx_index.html.j2
+      owner: root
+      group: root
+    notify:
+      - restart nginx
   - name: keepalived service
     service: name=keepalived state=started enabled=yes
+  - name: nginx service
+    service: name=nginx state=started enabled=yes
   handlers:
   - name: restart keepalived
     service: name=keepalived state=restarted
+  - name: restart nginx
+    service: name=nginx state=restarted
 
   

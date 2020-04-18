@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Keepalived {{ ansible_hostname }}!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>{{ ansible_hostname }} - {{ hosts[ansible_hostname] }}</h1>
+<h1>Virtual IP - {{ hosts["server"] }}</h1>
+</body>
+</html>
